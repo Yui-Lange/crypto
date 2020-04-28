@@ -1,0 +1,31 @@
+<h1>Cryptis</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Symbol</th>
+      <th>User</th>
+      <th>Cost per</th>
+      <th>Amount owned</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @cryptis.each do |crypti| %>
+      <tr>
+        <td><%= crypti.symbol %></td>
+        <td><%= crypti.user_id %></td>
+        <td><%= crypti.cost_per %></td>
+        <td><%= crypti.amount_owned %></td>
+        <td><%= link_to 'Show', crypti %></td>
+        <td><%= link_to 'Edit', edit_crypti_path(crypti) %></td>
+        <td><%= link_to 'Destroy', crypti, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Crypti', new_crypti_path %>

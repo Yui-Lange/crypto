@@ -1,0 +1,2 @@
+module CryptaHelper
+end

@@ -1,0 +1,23 @@
+
+<p>
+  <strong>Symbol:</strong>
+  <%= @cryptum.symbol %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @cryptum.user_id %>
+</p>
+
+<p>
+  <strong>Cost per:</strong>
+  <%= @cryptum.cost_per %>
+</p>
+
+<p>
+  <strong>Amount owned:</strong>
+  <%= @cryptum.amount_owned %>
+</p>
+
+<%= link_to 'Edit', edit_cryptum_path(@cryptum) %> |
+<%= link_to 'Back', crypta_path %>

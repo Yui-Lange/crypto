@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :crypta
+  resources :cryptis
   devise_for :users
   root 'pages#index', as: 'home'
 

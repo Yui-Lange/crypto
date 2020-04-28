@@ -1,0 +1,54 @@
+<% profit_loss = 0 %>
+
+
+<h1>Listing Crypto</h1>
+
+<table class ="table table-striped table-bordered table-hover">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Current Price</th>
+      <th>Total Value</th>
+      <th>Profit/Loss</th>
+      <th>Symbol</th>
+      <th>Cost Paid Per</th>
+      <th>Amount owned</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @crypta.each do |cryptum| %>
+    <%if cryptum.user_id == current_user.id %>
+      <% if cryptum.symbol %>
+        <% cryptum.symbol = cryptum.symbol.upcase %>
+        <% end %>
+        <tr>
+          <% for x in @lookup_crypto['data'] %>
+           <% if cryptum.symbol == x['symbol'] %>
+            <td> <%= x['name'] %> </td>
+            <td> <%= x['quote']['USD']['price'] %> </td>
+            <td> <%= x['quote']['USD']['price'].to_d*cryptum.amount_owned %> </td>
+            <td> <%= cryptum.amount_owned*cryptum.cost_per-x['quote']['USD']['price'].to_d*cryptum.amount_owned %> </td>
+            <% profit_loss += cryptum.amount_owned*cryptum.cost_per-x['quote']['USD']['price'].to_d*cryptum.amount_owned %>
+
+
+       <% end %>
+    <% end %>
+        <td><%= cryptum.symbol %></td>
+        <td><%= cryptum.cost_per %></td>
+        <td><%= cryptum.amount_owned %></td>
+        <td><%= link_to 'Show', cryptum %></td>
+        <td><%= link_to 'Edit', edit_cryptum_path(cryptum) %></td>
+        <td><%= link_to 'Destroy', cryptum, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+      <%end%>
+    <% end %>
+  </tbody>
+</table>
+<br>
+
+<strong> Portfolio Profit/Loss: </strong> <%=profit_loss %>
+
+<br>
+
+<%= link_to 'New Cryptum', new_cryptum_path, class: "btn btn-default"%>
